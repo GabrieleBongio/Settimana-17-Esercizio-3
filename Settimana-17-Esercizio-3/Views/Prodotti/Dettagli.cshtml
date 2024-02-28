@@ -1,0 +1,40 @@
+﻿@model Settimana_17_Esercizio_3.Models.Prodotti
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<h3 class="display-5 mb-4 ms-5">@Model.Nome</h3>
+
+<div class="row g-0">
+    <div class="col-4">
+        <div id="ImageCarousel" class="carousel carousel-dark slide border border-info border-opacity-75">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" alt="immagine carosello 1" src="@Model.ImmagineUno" />
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" alt="immagine carosello 2" src="@Model.ImmagineDue" />
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" alt="immagine carosello 3" src="@Model.ImmagineTre" />
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#ImageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#ImageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="ms-4">
+            <p class="fs-5 fw-lighter">Descrizione:</p>
+            <p>@Model.Descrizione.Replace('#', '\'')</p>
+            <p class="text-end fs-4 fw-light">@Model.Prezzo €</p>
+        </div>
+    </div>
+</div>
+

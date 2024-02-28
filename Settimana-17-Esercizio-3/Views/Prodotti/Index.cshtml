@@ -1,0 +1,25 @@
+﻿@model List<Settimana_17_Esercizio_3.Models.Prodotti>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="display-3">Benvenuti</h3>
+<h3 class="fs-5 fw-light">Prodotti:</h3>
+
+<div class="row g-1">
+    @foreach (Settimana_17_Esercizio_3.Models.Prodotti p in Model)
+    {
+        <div class="col-3">
+            <div class="card">
+                <img alt="immagine prodotto" class="img-fluid" src="@p.ImmagineUno" />
+                <div class="card-body">
+                    <h5 class="card-title">@p.Nome</h5>
+                    <p class="fw-lighter fs-5">@p.Prezzo €</p>
+                    @Html.ActionLink("Dettagli", "Dettagli", "Prodotti", new { IdProdotto = p.Id }, new { @class = "btn btn-outline-info" })
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
