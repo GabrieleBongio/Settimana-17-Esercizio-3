@@ -1,15 +1,21 @@
 ﻿@model List<Settimana_17_Esercizio_3.Models.Prodotti>
 @{
     ViewBag.Title = "Index";
+    string dNone = "d-none";
+    bool admin = false;
+    if (Session["Account"] == "admin")
+    {
+        admin = true;
+    }
 }
 
-<h3 class="display-3">Benvenuti</h3>
+<h3 class="display-3">Benvenuto @if (admin) { Write("Amministratore"); }</h3>
 <h3 class="fs-5 fw-light">Prodotti:</h3>
 
 <div class="row g-1">
     @foreach (Settimana_17_Esercizio_3.Models.Prodotti p in Model)
     {
-        <div class="col-3">
+        <div class="col-3 @if (!p.InVendita) { Write(dNone); } ">
             <div class="card">
                 <img alt="immagine prodotto" class="img-fluid" src="@p.ImmagineUno" />
                 <div class="card-body">

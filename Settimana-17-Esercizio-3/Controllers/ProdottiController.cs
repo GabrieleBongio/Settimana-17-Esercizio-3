@@ -102,5 +102,88 @@ namespace Settimana_17_Esercizio_3.Controllers
 
             return View(Prodotto);
         }
+
+        public ActionResult Modifica()
+        {
+            string id = Request.QueryString["IdProdotto"];
+
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Prodotti Prodotto = new Prodotti();
+
+            string connString = ConfigurationManager
+                .ConnectionStrings["myConnection"]
+                .ConnectionString.ToString();
+            SqlConnection conn = new SqlConnection(connString);
+
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM Prodotti WHERE IdProdotto = " + id;
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Prodotto.Id = reader.GetInt32(0);
+                    Prodotto.Nome = reader.GetString(1);
+                    Prodotto.Prezzo = reader.GetSqlMoney(2).ToDouble();
+                    Prodotto.Descrizione = reader.GetString(3);
+                    Prodotto.ImmagineUno = reader.GetString(4);
+                    Prodotto.ImmagineDue = reader.GetString(5);
+                    Prodotto.ImmagineTre = reader.GetString(6);
+                    Prodotto.InVendita = reader.GetBoolean(7);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return View(Prodotto);
+        }
+
+        [HttpPost]
+        public ActionResult Modifica(Prodotti p)
+        {
+            string connString = ConfigurationManager
+                .ConnectionStrings["myConnection"]
+                .ConnectionString.ToString();
+            SqlConnection conn = new SqlConnection(connString);
+
+            try
+            {
+                conn.Open();
+                string query =
+                    "UPDATE Prodotti SET Nome = @Nome, Prezzo = @Prezzo, Descrizione = @Descrizione, ImmagineUno = @ImmagineUno, ImmagineDue = @ImmagineDue, ImmagineTre = @ImmagineTre, InVendita = @InVendita WHERE IdProdotto = "
+                    + p.Id;
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nome", p.Nome);
+                cmd.Parameters.AddWithValue("@Prezzo", p.Prezzo);
+                cmd.Parameters.AddWithValue("@Descrizione", p.Descrizione);
+                cmd.Parameters.AddWithValue("@ImmagineUno", p.ImmagineUno);
+                cmd.Parameters.AddWithValue("@ImmagineDue", p.ImmagineDue);
+                cmd.Parameters.AddWithValue("@ImmagineTre", p.ImmagineTre);
+                cmd.Parameters.AddWithValue("@InVendita", p.InVendita);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return View();
+        }
     }
 }

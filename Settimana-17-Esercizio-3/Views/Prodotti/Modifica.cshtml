@@ -1,0 +1,86 @@
+﻿@model Settimana_17_Esercizio_3.Models.Prodotti
+
+@{
+    ViewBag.Title = "Modifica";
+}
+
+<h2>Modifica</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Prodotti</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="d-none">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @value = Model.Nome } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prezzo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prezzo, new { htmlAttributes = new { @class = "form-control", @value = Model.Prezzo } })
+                @Html.ValidationMessageFor(model => model.Prezzo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descrizione, new { htmlAttributes = new { @class = "form-control", @value = Model.Descrizione } })
+                @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImmagineUno, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImmagineUno, new { htmlAttributes = new { @class = "form-control", @value = Model.ImmagineUno } })
+                @Html.ValidationMessageFor(model => model.ImmagineUno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImmagineDue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImmagineDue, new { htmlAttributes = new { @class = "form-control", @value = Model.ImmagineDue } })
+                @Html.ValidationMessageFor(model => model.ImmagineDue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImmagineTre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImmagineTre, new { htmlAttributes = new { @class = "form-control", @value = Model.ImmagineTre } })
+                @Html.ValidationMessageFor(model => model.ImmagineTre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.InVendita, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.InVendita, new { htmlAttributes = new { @checked = true } })
+                    @Html.ValidationMessageFor(model => model.InVendita, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group my-3">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Modifica" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Torna alla Home", "Index", "Prodotti", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</div>

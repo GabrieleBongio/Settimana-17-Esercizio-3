@@ -1,6 +1,11 @@
 ﻿@model Settimana_17_Esercizio_3.Models.Prodotti
 @{
     ViewBag.Title = "Dettagli";
+    bool admin = false;
+    if (Session["Account"] == "admin")
+    {
+        admin = true;
+    }
 }
 
 <h3 class="display-5 mb-4 ms-5">@Model.Nome</h3>
@@ -37,4 +42,7 @@
         </div>
     </div>
 </div>
+
+@if (admin)
+{<div class="text-center">@Html.ActionLink("Modifica", "Modifica", "Prodotti", new { IdProdotto = Model.Id }, new { @class = "btn btn-outline-primary" })</div>}
 

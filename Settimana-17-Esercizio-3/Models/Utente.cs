@@ -19,13 +19,5 @@ namespace Settimana_17_Esercizio_3.Models
         [MaxLength(50, ErrorMessage = "La password deve avere tra i 6 e i 50 caratteri")]
         [PasswordPropertyText]
         public string Password { get; set; }
-
-        [Required]
-        [Compare(
-            "Password",
-            ErrorMessage = "Questo campo deve essere uguale alla Password inserita sopra"
-        )]
-        [Display(Name = "Conferma Password")]
-        public string ConfermaPassword { get; set; }
     }
 }

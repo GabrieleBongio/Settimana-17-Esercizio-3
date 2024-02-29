@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string account = "Login";
+    if (Session["Account"] == "user" || Session["Account"] == "admin")
+    {
+        account = "Logout";
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,6 +28,9 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>
                         @Html.ActionLink("Home", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="ms-auto">
+                        @Html.ActionLink(account, account, "Utente", new { area = "" }, new { @class = "nav-link" })
                     </li>
                 </ul>
             </div>
